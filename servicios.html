@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - JJ Cámaras y Alarmas</title>
+    <meta name="description" content="Conocé todos nuestros servicios de seguridad: Cámaras CCTV, Alarmas Smart, Cercos Eléctricos y más.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-900 font-sans selection:bg-red-600 selection:text-white overflow-x-hidden">
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a 
+        href="https://wa.me/5491151016870" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:bg-[#20bd5a] transition-all transform hover:scale-110 flex items-center justify-center"
+        aria-label="Contactar por WhatsApp"
+    >
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8">
+    </a>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-40 bg-black/90 backdrop-blur-md border-b border-gray-800 py-3">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <div class="bg-red-600 p-1.5 rounded-sm shadow-lg shadow-red-600/20">
+                    <i data-lucide="shield" class="w-6 h-6 text-white"></i>
+                </div>
+                <span class="text-xl md:text-2xl font-bold tracking-tighter text-white">JJ SEGURIDAD</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 items-center font-medium text-sm uppercase tracking-widest text-white/80">
+                <a href="index.html" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Inicio</a>
+                <a href="nosotros.html" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Nosotros</a>
+                <a href="servicios.html" class="text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500">Servicios</a>
+                <a href="index.html#galeria" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Proyectos</a>
+                <a href="index.html#locales" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Locales</a>
+                <a href="index.html#contacto" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-sm transition-all duration-300 font-bold hover:shadow-[0_0_20px_rgba(220,38,38,0.8)] hover:scale-105">
+                    COTIZAR
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="toggleMenu()">
+                <i data-lucide="menu" id="menuIcon" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenu" class="fixed inset-0 bg-black/95 backdrop-blur-xl border-t border-gray-800 z-50 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col">
+            <div class="flex justify-end p-6">
+                <button class="text-white" onclick="toggleMenu()">
+                    <i data-lucide="x" class="w-7 h-7"></i>
+                </button>
+            </div>
+            <div class="flex flex-col px-8 gap-6 text-center text-white h-full justify-center">
+                <a href="index.html" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Inicio</a>
+                <a href="nosotros.html" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Nosotros</a>
+                <a href="servicios.html" class="text-2xl font-bold text-red-500 uppercase py-4 border-b border-gray-800">Servicios</a>
+                <a href="index.html#galeria" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Galería</a>
+                <a href="index.html#locales" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Ubicación</a>
+                <a href="index.html#contacto" class="text-2xl font-light uppercase py-4 mt-4">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black z-10"></div>
+        
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(220, 38, 38, 0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+        </div>
+        
+        <div class="relative z-20 container mx-auto px-6 text-center text-white py-20">
+            <div class="inline-flex items-center gap-2 border border-red-500/50 bg-red-500/10 px-4 py-1 rounded-full mb-6 backdrop-blur-sm animate-fade-in-up">
+                <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                <span class="text-xs md:text-sm font-bold tracking-widest uppercase text-red-400">Soluciones Personalizadas</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight uppercase animate-fade-in-up" style="animation-delay: 0.1s">
+                Nuestros <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-red-800">Servicios</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s">
+                Protección integral con tecnología de última generación. <br class="hidden md:block"/>
+                Desde hogares hasta grandes empresas, tenemos la solución perfecta para vos.
+            </p>
+        </div>
+    </section>
+
+    <!-- Servicios Principales -->
+    <section class="py-24 bg-black text-white">
+        <div class="container mx-auto px-6">
+            
+            <!-- Servicio 1: Cámaras CCTV/IP -->
+            <div class="mb-32 reveal">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-red-600 p-3 rounded-sm">
+                                <i data-lucide="video" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-red-500 font-bold tracking-widest uppercase text-sm">Videovigilancia</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black mb-6 uppercase">Cámaras CCTV/IP</h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                            Sistemas de videovigilancia de última generación con las mejores marcas del mercado: <strong class="text-white">Dahua, Hikvision e Imou</strong>. Visión nocturna a color, detección de movimiento inteligente y almacenamiento en la nube o local.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Resolución hasta 8MP</h4>
+                                    <p class="text-gray-500 text-sm">Imágenes ultra nítidas día y noche</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Acceso remoto 24/7</h4>
+                                    <p class="text-gray-500 text-sm">Mirá tus cámaras desde cualquier lugar del mundo</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Grabación continua o por eventos</h4>
+                                    <p class="text-gray-500 text-sm">Almacenamiento inteligente que optimiza espacio</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Audio bidireccional</h4>
+                                    <p class="text-gray-500 text-sm">Escuchá y hablá a través de las cámaras</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-neutral-800 px-4 py-2 rounded-full text-sm">Hogares</span>
+                            <span class="bg-neutral-800 px-4 py-2 rounded-full text-sm">Comercios</span>
+                            <span class="bg-neutral-800 px-4 py-2 rounded-full text-sm">Industrias</span>
+                            <span class="bg-neutral-800 px-4 py-2 rounded-full text-sm">Barrios Privados</span>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="relative rounded-lg overflow-hidden shadow-2xl border border-neutral-800">
+                            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=2070&auto=format&fit=crop" alt="Cámaras CCTV" class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 2: Alarmas Smart -->
+            <div class="mb-32 reveal">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="relative rounded-lg overflow-hidden shadow-2xl border border-neutral-800">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070&auto=format&fit=crop" alt="Alarmas Smart" class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-red-600 p-3 rounded-sm">
+                                <i data-lucide="smartphone" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-red-500 font-bold tracking-widest uppercase text-sm">Alarmas Inteligentes</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black mb-6 uppercase">Alarmas Smart</h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                            Protección inteligente sin abonos mensuales. Controlá todo desde tu celular con notificaciones instantáneas ante cualquier evento. Sistemas inalámbricos y cableados disponibles.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Sin costos mensuales</h4>
+                                    <p class="text-gray-500 text-sm">Pagás una sola vez, seguridad para siempre</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">App móvil intuitiva</h4>
+                                    <p class="text-gray-500 text-sm">Armá y desarmá desde cualquier lugar</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Sensores de movimiento, puertas y ventanas</h4>
+                                    <p class="text-gray-500 text-sm">Detección completa de intrusiones</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Sirenas potentes y botones de pánico</h4>
+                                    <p class="text-gray-500 text-sm">Disuasión inmediata ante emergencias</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-neutral-900 border border-neutral-800 p-6 rounded-lg">
+                            <p class="text-sm text-gray-400 mb-2"><strong class="text-white">Incluye:</strong></p>
+                            <p class="text-sm text-gray-300">Central • Sensores • Control remoto • Sirena • Configuración • App móvil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 3: Alarmas Vecinales -->
+            <div class="mb-32 reveal">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-red-600 p-3 rounded-sm">
+                                <i data-lucide="users" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-red-500 font-bold tracking-widest uppercase text-sm">Seguridad Comunitaria</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black mb-6 uppercase">Alarmas Vecinales</h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                            Protección comunitaria que conecta a todos los vecinos. Botones de pánico inalámbricos en cada casa, sirenas perimetrales de alta potencia y sistema de alertas instantáneas. <strong class="text-white">Proveedores oficiales del Municipio de Ituzaingó</strong>.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Botones de pánico en cada vivienda</h4>
+                                    <p class="text-gray-500 text-sm">Activación inmediata de alarma comunitaria</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Sirenas perimetrales de 120dB</h4>
+                                    <p class="text-gray-500 text-sm">Audibles en toda la cuadra</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Grupo de WhatsApp integrado</h4>
+                                    <p class="text-gray-500 text-sm">Comunicación instantánea entre vecinos</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Instalación con subsidio municipal</h4>
+                                    <p class="text-gray-500 text-sm">Consultá por descuentos especiales</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-900/20 border border-red-600/30 p-6 rounded-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="shield-check" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white mb-2">Experiencia Municipal</h4>
+                                    <p class="text-sm text-gray-300">Más de 50 cuadras protegidas en Ituzaingó. Trabajamos en conjunto con el municipio para brindar la mejor seguridad a tu barrio.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="relative rounded-lg overflow-hidden shadow-2xl border border-neutral-800">
+                            <img src="https://images.unsplash.com/photo-1516575334481-f85287c2c82d?q=80&w=2070&auto=format&fit=crop" alt="Alarmas Vecinales" class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 4: Cercos Eléctricos -->
+            <div class="mb-32 reveal">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="relative rounded-lg overflow-hidden shadow-2xl border border-neutral-800">
+                            <img src="https://images.unsplash.com/photo-1590845947698-8924d7409b56?q=80&w=2000&auto=format&fit=crop" alt="Cercos Eléctricos" class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-red-600 p-3 rounded-sm">
+                                <i data-lucide="zap" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-red-500 font-bold tracking-widest uppercase text-sm">Seguridad Perimetral</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black mb-6 uppercase">Cercos Eléctricos</h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                            Barrera de protección perimetral con pulsos eléctricos de alta tensión certificados. Instalación profesional en muros, rejas y perímetros completos. Sistema totalmente legal y seguro.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Pulsos de 10.000V certificados</h4>
+                                    <p class="text-gray-500 text-sm">Disuasión efectiva sin riesgo mortal</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Monitoreo de corte de cables</h4>
+                                    <p class="text-gray-500 text-sm">Alarma inmediata ante sabotaje</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Bajo consumo eléctrico</h4>
+                                    <p class="text-gray-500 text-sm">Menos de $500/mes en energía</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="text-red-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-white">Garantía de 2 años</h4>
+                                    <p class="text-gray-500 text-sm">Soporte técnico incluido</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-900/20 border border-yellow-600/30 p-6 rounded-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="alert-triangle" class="text-yellow-500 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-yellow-400 mb-2">Instalación Profesional</h4>
+                                    <p class="text-sm text-gray-300">Incluye señalética de advertencia reglamentaria y puesta a tierra normada. Cumplimos con todas las normativas vigentes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Servicios Adicionales -->
+    <section class="py-24 bg-neutral-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 uppercase">Servicios <span class="text-red-500">Complementarios</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Soluciones adicionales para completar tu sistema de seguridad</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg hover:border-red-600 transition-colors group reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.6)] transition-all">
+                        <i data-lucide="wrench" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Mantenimiento</h3>
+                    <p class="text-gray-400 mb-6">Service preventivo y correctivo de tus equipos. Limpieza de cámaras, revisión de cables y actualización de firmware.</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li>✓ Revisión semestral incluida</li>
+                        <li>✓ Repuestos originales</li>
+                        <li>✓ Atención 24/7 emergencias</li>
+                    </ul>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg hover:border-red-600 transition-colors group reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.6)] transition-all">
+                        <i data-lucide="wifi" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Redes & WiFi</h3>
+                    <p class="text-gray-400 mb-6">Instalación de redes cableadas e inalámbricas para tu sistema de seguridad. Puntos de acceso y routers empresariales.</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li>✓ Cableado estructurado</li>
+                        <li>✓ Configuración de routers</li>
+                        <li>✓ Amplificadores WiFi</li>
+                    </ul>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg hover:border-red-600 transition-colors group reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.6)] transition-all">
+                        <i data-lucide="home" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Domótica</h3>
+                    <p class="text-gray-400 mb-6">Automatización inteligente de tu hogar o negocio. Control de luces, persianas, climatización y más desde tu celular.</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li>✓ Integración con alarmas</li>
+                        <li>✓ Escenas personalizadas</li>
+                        <li>✓ Control por voz</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso de Trabajo -->
+    <section class="py-24 bg-black text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 uppercase">¿Cómo <span class="text-red-500">Trabajamos?</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Proceso simple y transparente de principio a fin</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black">1</div>
+                    <h3 class="text-xl font-bold mb-3 uppercase">Consulta</h3>
+                    <p class="text-gray-400 text-sm">Contactanos por WhatsApp, teléfono o formulario. Te respondemos al instante.</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black">2</div>
+                    <h3 class="text-xl font-bold mb-3 uppercase">Visita Técnica</h3>
+                    <p class="text-gray-400 text-sm">Vamos sin cargo a relevar tu propiedad y asesorarte sobre la mejor solución.</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black">3</div>
+                    <h3 class="text-xl font-bold mb-3 uppercase">Presupuesto</h3>
+                    <p class="text-gray-400 text-sm">Recibís una cotización detallada sin letra chica. Financiación disponible.</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black">4</div>
+                    <h3 class="text-xl font-bold mb-3 uppercase">Instalación</h3>
+                    <p class="text-gray-400 text-sm">Instalamos en el día pactado. Capacitación incluida. Pagás cuando esté terminado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="py-24 bg-gradient-to-b from-neutral-900 to-black text-white">
+        <div class="container mx-auto px-6 text-center reveal">
+            <h2 class="text-4xl md:text-6xl font-black mb-6 uppercase">¿Listo para estar <span class="text-red-500">protegido?</span></h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">La seguridad no puede esperar. Solicitá tu visita técnica gratuita hoy mismo.</p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <a href="https://wa.me/5491151016870" target="_blank" class="w-full md:w-auto bg-red-600 text-white px-10 py-5 rounded-sm font-bold text-lg hover:bg-red-700 transition-all hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] uppercase tracking-wider">
+                    <i data-lucide="phone" class="inline-block w-5 h-5 mr-2"></i> Llamar Ahora
+                </a>
+                <a href="index.html#contacto" class="w-full md:w-auto flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-10 py-5 rounded-sm font-bold text-lg hover:bg-white hover:text-black transition-all uppercase tracking-wider">
+                    Formulario de Contacto
+                </a>
+            </div>
+
+            <p class="text-gray-500 text-sm mt-8">
+                <i data-lucide="check-circle" class="inline-block w-4 h-4 text-red-500"></i> Visita técnica sin cargo
+                <span class="mx-3">•</span>
+                <i data-lucide="check-circle" class="inline-block w-4 h-4 text-red-500"></i> Presupuesto sin compromiso
+                <span class="mx-3">•</span>
+                <i data-lucide="check-circle" class="inline-block w-4 h-4 text-red-500"></i> Garantía de fábrica
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-neutral-600 py-10 border-t border-neutral-900 text-center text-xs uppercase tracking-widest">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2024 JJ Cámaras y Alarmas.</p>
+            <div class="flex gap-6">
+                <a href="https://www.instagram.com/jjcamarasyalarmas/" target="_blank" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="instagram" class="w-4 h-4"></i> Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=100064225564213" target="_blank" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="facebook" class="w-4 h-4"></i> Facebook</a>
+                <a href="https://www.youtube.com/@JJC%C3%A1marasyAlarmas" target="_blank" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="youtube" class="w-4 h-4"></i> Youtube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        function toggleMenu() {
+            const isOpen = !mobileMenu.classList.contains('translate-x-full');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>

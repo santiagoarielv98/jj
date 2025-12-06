@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ Cámaras y Alarmas - Seguridad Integral</title>
+    <meta name="description" content="Seguridad Integral en Zona Oeste. Cámaras, Alarmas y Cercos Eléctricos. Visita técnica gratuita.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    animation: {
+                        'pulse-slow': 'pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .rounded-sm{
+            border-radius: 2rem !important;
+        }
+        /* Estilos personalizados para animaciones de scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-900 font-sans selection:bg-red-600 selection:text-white overflow-x-hidden">
+
+    <!-- Botón Flotante de WhatsApp (Simplificado) -->
+    <a 
+        href="https://wa.me/5491151016870" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:bg-[#20bd5a] transition-all transform hover:scale-110 flex items-center justify-center"
+        aria-label="Contactar por WhatsApp"
+    >
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8">
+    </a>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="scrollToSection('hero')">
+                <div class="bg-red-600 p-1.5 rounded-sm shadow-lg shadow-red-600/20">
+                    <i data-lucide="shield" class="w-6 h-6 text-white"></i>
+                </div>
+                <span class="text-xl md:text-2xl font-bold tracking-tighter text-white">JJ SEGURIDAD</span>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 items-center font-medium text-sm uppercase tracking-widest text-white/80">
+                <a href="nosotros.html" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Nosotros</a>
+                <a href="servicios.html" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Servicios</a>
+                <button onclick="scrollToSection('galeria')" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Proyectos</button>
+                <button onclick="scrollToSection('locales')" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Locales</button>
+                <button onclick="scrollToSection('contacto')" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-sm transition-all duration-300 font-bold hover:shadow-[0_0_20px_rgba(220,38,38,0.8)] hover:scale-105">
+                    COTIZAR
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="toggleMenu()">
+                <i data-lucide="menu" id="menuIcon" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenu" class="fixed inset-0 bg-black/95 backdrop-blur-xl border-t border-gray-800 z-50 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col">
+            <div class="flex justify-end p-6">
+                <button class="text-white" onclick="toggleMenu()">
+                    <i data-lucide="x" class="w-7 h-7"></i>
+                </button>
+            </div>
+            <div class="flex flex-col px-8 gap-6 text-center text-white h-full justify-center">
+                <a href="nosotros.html" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Nosotros</a>
+                <a href="servicios.html" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Servicios</a>
+                <button onclick="mobileNavClick('galeria')" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Galería</button>
+                <button onclick="mobileNavClick('locales')" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Ubicación</button>
+                <button onclick="mobileNavClick('contacto')" class="text-2xl font-bold text-red-500 uppercase py-4 mt-4">Contacto</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Overlay oscuro -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10"></div>
+        
+        <!-- Imagen de Fondo -->
+        <div class="absolute inset-0 z-0">
+           <img 
+            src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=2070&auto=format&fit=cover" 
+            alt="Cámara de Seguridad" 
+            class="w-full h-full object-cover scale-105 animate-pulse-slow" 
+            style="animation-duration: 30s;"
+          />
+        </div>
+        
+        <div class="relative z-20 container mx-auto px-6 text-center text-white mt-16">
+            <div class="inline-flex items-center gap-2 border border-red-500/50 bg-red-500/10 px-4 py-1 rounded-full mb-6 backdrop-blur-sm animate-fade-in-up">
+                <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                <span class="text-xs md:text-sm font-bold tracking-widest uppercase text-red-400">Proveedores Municipales Oficiales</span>
+            </div>
+
+            <h1 class="text-5xl md:text-8xl font-black mb-6 leading-none tracking-tight uppercase animate-fade-in-up" style="animation-delay: 0.1s">
+                Cuidamos <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-red-800 drop-shadow-[0_0_15px_rgba(220,38,38,0.5)]">Tu Mundo</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s">
+                Tecnología de punta en alarmas y videovigilancia. <br class="hidden md:block"/>
+                Controlá todo desde tu celular.
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center animate-fade-in-up" style="animation-delay: 0.4s">
+                <button onclick="scrollToSection('contacto')" class="w-full md:w-auto bg-red-600 text-white px-10 py-4 rounded-sm font-bold text-lg hover:bg-red-700 transition-all hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] uppercase tracking-wider">
+                    Solicitar Visita Gratis
+                </button>
+                <button onclick="scrollToSection('galeria')" class="w-full md:w-auto flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-black transition-all uppercase tracking-wider group">
+                    <i data-lucide="play-circle" class="group-hover:text-red-600 transition-colors"></i> Ver Trabajos
+                </button>
+            </div>
+            
+            <p class="text-gray-400 text-sm mt-6 animate-fade-in-up" style="animation-delay: 0.5s">
+                Zona Oeste • Ituzaingó y alrededores
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce text-white/50">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="bg-neutral-900 border-b border-neutral-800 relative z-20">
+        <div class="container mx-auto px-6 py-6 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-800">
+            <div class="flex items-center justify-center gap-4 py-2 text-gray-400 reveal">
+                <i data-lucide="check-circle" class="text-red-500"></i>
+                <span class="font-bold text-sm tracking-widest uppercase">Garantía de Fábrica</span>
+            </div>
+            <div class="flex items-center justify-center gap-4 py-2 text-gray-400 reveal">
+                <i data-lucide="check-circle" class="text-red-500"></i>
+                <span class="font-bold text-sm tracking-widest uppercase">Sin cobro adelantado</span>
+            </div>
+            <div class="flex items-center justify-center gap-4 py-2 text-gray-400 reveal">
+                <i data-lucide="check-circle" class="text-red-500"></i>
+                <span class="font-bold text-sm tracking-widest uppercase">Locales a la calle</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-24 bg-black text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-20 reveal">
+                <span class="text-red-500 font-bold tracking-widest uppercase text-sm">Nuestras Soluciones</span>
+                <h2 class="text-4xl md:text-5xl font-black mt-2 uppercase">Protección Integral</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Servicio 1 -->
+                <div class="group relative h-[450px] rounded-lg overflow-hidden cursor-pointer border border-neutral-800 hover:border-red-600 transition-colors duration-500 reveal">
+                    <div class="absolute inset-0 bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=2070&auto=format&fit=crop" alt="Cámaras" class="w-full h-full object-cover opacity-50 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+                    </div>
+                    <div class="absolute bottom-0 p-6 w-full">
+                        <div class="bg-red-600 w-12 h-12 flex items-center justify-center rounded-sm mb-4 text-white group-hover:shadow-[0_0_15px_red] transition-all">
+                            <i data-lucide="video" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold uppercase mb-2">Cámaras CCTV/IP</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed border-t border-gray-700 pt-4 mt-2 group-hover:text-white transition-colors">
+                            Dahua, Hikvision, Imou. Visión nocturna color.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="group relative h-[450px] rounded-lg overflow-hidden cursor-pointer border border-neutral-800 hover:border-red-600 transition-colors duration-500 reveal">
+                    <div class="absolute inset-0 bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070&auto=format&fit=crop" alt="Alarmas" class="w-full h-full object-cover opacity-50 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+                    </div>
+                    <div class="absolute bottom-0 p-6 w-full">
+                        <div class="bg-red-600 w-12 h-12 flex items-center justify-center rounded-sm mb-4 text-white group-hover:shadow-[0_0_15px_red] transition-all">
+                            <i data-lucide="smartphone" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold uppercase mb-2">Alarmas Smart</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed border-t border-gray-700 pt-4 mt-2 group-hover:text-white transition-colors">
+                            Control total vía App. Sin abonos mensuales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="group relative h-[450px] rounded-lg overflow-hidden cursor-pointer border border-neutral-800 hover:border-red-600 transition-colors duration-500 reveal">
+                    <div class="absolute inset-0 bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1516575334481-f85287c2c82d?q=80&w=2070&auto=format&fit=crop" alt="Vecinales" class="w-full h-full object-cover opacity-50 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+                    </div>
+                    <div class="absolute bottom-0 p-6 w-full">
+                        <div class="bg-red-600 w-12 h-12 flex items-center justify-center rounded-sm mb-4 text-white group-hover:shadow-[0_0_15px_red] transition-all">
+                            <i data-lucide="users" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold uppercase mb-2">Alarmas Vecinales</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed border-t border-gray-700 pt-4 mt-2 group-hover:text-white transition-colors">
+                            Botones de pánico y sirenas comunitarias.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="group relative h-[450px] rounded-lg overflow-hidden cursor-pointer border border-neutral-800 hover:border-red-600 transition-colors duration-500 reveal">
+                    <div class="absolute inset-0 bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1590845947698-8924d7409b56?q=80&w=2000&auto=format&fit=crop" alt="Cercos" class="w-full h-full object-cover opacity-50 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+                    </div>
+                    <div class="absolute bottom-0 p-6 w-full">
+                        <div class="bg-red-600 w-12 h-12 flex items-center justify-center rounded-sm mb-4 text-white group-hover:shadow-[0_0_15px_red] transition-all">
+                            <i data-lucide="zap" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold uppercase mb-2">Cercos Eléctricos</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed border-t border-gray-700 pt-4 mt-2 group-hover:text-white transition-colors">
+                            Alta tensión certificada y segura.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería Visual -->
+    <section id="galeria" class="py-24 bg-neutral-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 reveal">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-black uppercase text-white mb-2">
+                        Trabajos <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">Reales</span>
+                    </h2>
+                    <p class="text-gray-400">Instalaciones en Zona Oeste y la Costa.</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="bg-red-600 text-white px-3 py-1 text-xs font-bold uppercase rounded">Ituzaingó</span>
+                    <span class="border border-gray-600 text-gray-300 px-3 py-1 text-xs font-bold uppercase rounded">Barrios Cerrados</span>
+                    <span class="border border-gray-600 text-gray-300 px-3 py-1 text-xs font-bold uppercase rounded">Empresas</span>
+                </div>
+            </div>
+
+            <!-- Bento Box Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[600px] reveal">
+                <!-- Item Grande -->
+                <div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-sm bg-black min-h-[300px]">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=cover" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700" alt="Empresa Grande">
+                    <div class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black to-transparent">
+                        <div class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block mb-2">PROYECTO CORPORATIVO</div>
+                        <h3 class="text-2xl md:text-3xl font-bold">Seguridad Perimetral Fábrica</h3>
+                        <p class="text-gray-300 mt-2 text-sm md:text-base">Instalación de 32 cámaras y cerco de 500mts.</p>
+                    </div>
+                </div>
+
+                <!-- Item Pequeño 1 -->
+                <div class="relative group overflow-hidden rounded-sm bg-black min-h-[200px]">
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700" alt="Casa">
+                    <div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black to-transparent">
+                        <h3 class="text-xl font-bold">Barrio Assecuranza</h3>
+                    </div>
+                </div>
+
+                <!-- Item Pequeño 2 -->
+                <div class="relative group overflow-hidden rounded-sm bg-black min-h-[200px]">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700" alt="Técnicos">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="border border-white text-white px-6 py-2 uppercase font-bold tracking-widest hover:bg-white hover:text-black transition-colors cursor-pointer">Ver Detalle</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center reveal">
+                <a href="https://www.instagram.com/jjcamarasyalarmas/" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 text-gray-400 hover:text-red-500 transition-colors uppercase font-bold tracking-widest text-sm">
+                    <i data-lucide="instagram" class="w-5 h-5"></i> Ver más en Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aliados -->
+    <section id="clientes" class="py-20 bg-white">
+        <div class="container mx-auto px-6 reveal">
+            <p class="text-center text-gray-400 text-sm font-bold tracking-[0.2em] uppercase mb-12">Nuestros Aliados y Clientes</p>
+            
+            <div class="flex flex-wrap justify-center gap-12 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 mb-10">
+                <div class="text-xl md:text-2xl font-black text-black tracking-tighter">HIKVISION</div>
+                <div class="text-xl md:text-2xl font-black text-black tracking-tighter">DAHUA</div>
+                <div class="text-xl md:text-2xl font-black text-black tracking-tighter">MUNICIPIO ITUZAINGÓ</div>
+                <div class="text-xl md:text-2xl font-black text-black tracking-tighter">DSC</div>
+                <div class="text-xl md:text-2xl font-black text-black tracking-tighter">ALARCOM</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locales -->
+    <section id="locales" class="py-20 bg-neutral-100 border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl font-black uppercase text-black mb-2">Nuestros Locales</h2>
+                <p class="text-gray-500">Acercate a conocer nuestros equipos en exhibición.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Local 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg group hover:shadow-2xl transition-shadow reveal">
+                    <div class="h-64 bg-gray-300 relative">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Cnel.%20Brandsen%202386%2C%20Ituzaing%C3%B3&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="grayscale group-hover:grayscale-0 transition-all duration-500"
+                        ></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="map-pin" class="text-red-600 w-5 h-5"></i>
+                            <h3 class="font-bold text-lg uppercase">Ituzaingó</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">Cnel. Brandsen 2386</p>
+                        <p class="text-gray-400 text-xs mt-1">Provincia de Buenos Aires</p>
+                    </div>
+                </div>
+
+                <!-- Local 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg group hover:shadow-2xl transition-shadow reveal">
+                    <div class="h-64 bg-gray-300 relative">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Calle%2096%20288%2C%20Mar%20del%20Tuy%C3%BA&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="grayscale group-hover:grayscale-0 transition-all duration-500"
+                        ></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                             <i data-lucide="map-pin" class="text-red-600 w-5 h-5"></i>
+                            <h3 class="font-bold text-lg uppercase">Mar del Tuyú</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">Calle 96 N° 288</p>
+                        <p class="text-gray-400 text-xs mt-1">Costa Atlántica</p>
+                    </div>
+                </div>
+
+                <!-- Local 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg group hover:shadow-2xl transition-shadow reveal">
+                    <div class="h-64 bg-gray-300 relative">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Chiozza%203344%2C%20San%20Bernardo&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="grayscale group-hover:grayscale-0 transition-all duration-500"
+                        ></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                             <i data-lucide="map-pin" class="text-red-600 w-5 h-5"></i>
+                            <h3 class="font-bold text-lg uppercase">San Bernardo</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">Chiozza 3344</p>
+                        <p class="text-gray-400 text-xs mt-1">Costa Atlántica</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-24 bg-black text-white relative overflow-hidden">
+        <div class="absolute -left-20 -bottom-20 w-[500px] h-[500px] bg-red-900/20 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <div class="reveal">
+                    <span class="text-red-500 font-bold uppercase tracking-widest text-sm mb-2 block">Contacto Directo</span>
+                    <h2 class="text-4xl md:text-6xl font-black mb-8 leading-tight">
+                        ¿LISTO PARA <br/> ESTAR SEGURO?
+                    </h2>
+                    
+                    <div class="space-y-8 mt-12">
+                        <div class="flex items-start gap-6 group">
+                            <div class="bg-neutral-800 p-4 rounded-sm text-red-500 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                                <i data-lucide="phone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold uppercase">Llamanos o Escribinos</h4>
+                                <a href="https://wa.me/5491151016870" target="_blank" rel="noreferrer" class="text-gray-400 text-2xl font-light mt-1 hover:text-white transition-colors cursor-pointer block">+54 9 11 5101-6870</a>
+                                <p class="text-sm text-red-500 mt-1 font-bold">Respuesta inmediata</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-6 group">
+                            <div class="bg-neutral-800 p-4 rounded-sm text-red-500 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold uppercase">Visitanos</h4>
+                                <p class="text-gray-400 mt-1">Ituzaingó • Mar del Tuyú • San Bernardo</p>
+                                <p class="text-sm text-gray-500 mt-1">Locales a la calle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-900 p-8 md:p-12 rounded-sm border border-neutral-800 shadow-2xl reveal">
+                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Gracias por tu consulta. Te contactaremos pronto.');">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Nombre</label>
+                                <input type="text" class="w-full bg-black border border-neutral-700 text-white p-4 focus:border-red-600 outline-none transition-colors rounded-sm" placeholder="Juan Perez" required>
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Teléfono</label>
+                                <input type="tel" class="w-full bg-black border border-neutral-700 text-white p-4 focus:border-red-600 outline-none transition-colors rounded-sm" placeholder="11..." required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Interés</label>
+                            <select class="w-full bg-black border border-neutral-700 text-white p-4 focus:border-red-600 outline-none transition-colors appearance-none rounded-sm">
+                                <option>Cámaras de Seguridad</option>
+                                <option>Alarmas Vecinales</option>
+                                <option>Alarmas Hogareñas</option>
+                                <option>Cerco Eléctrico</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Mensaje</label>
+                            <textarea class="w-full bg-black border border-neutral-700 text-white p-4 focus:border-red-600 outline-none transition-colors rounded-sm h-32" placeholder="Hola, necesito presupuesto para..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-red-600 text-white font-bold py-5 rounded-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                            Enviar Consulta
+                        </button>
+                        <p class="text-center text-gray-500 text-xs">Tus datos están protegidos. Te contactaremos vía WhatsApp.</p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-neutral-600 py-10 border-t border-neutral-900 text-center text-xs uppercase tracking-widest">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2024 JJ Cámaras y Alarmas.</p>
+            <div class="flex gap-6">
+                <a href="https://www.instagram.com/jjcamarasyalarmas/" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="instagram" class="w-4 h-4"></i> Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=100064225564213" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="facebook" class="w-4 h-4"></i> Facebook</a>
+                <a href="https://www.youtube.com/@JJC%C3%A1marasyAlarmas" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="youtube" class="w-4 h-4"></i> Youtube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de Funcionalidad -->
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90', 'backdrop-blur-md', 'border-b', 'border-gray-800', 'py-3');
+                navbar.classList.remove('bg-transparent', 'py-6');
+            } else {
+                navbar.classList.remove('bg-black/90', 'backdrop-blur-md', 'border-b', 'border-gray-800', 'py-3');
+                navbar.classList.add('bg-transparent', 'py-6');
+            }
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+
+        // Smooth Scroll Function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                closeMenu();
+            }
+        }
+
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        function toggleMenu() {
+            const isOpen = !mobileMenu.classList.contains('translate-x-full');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        }
+
+        function mobileNavClick(id) {
+            scrollToSection(id);
+        }
+    </script>
+</body>
+</html>

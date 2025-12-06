@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - JJ Cámaras y Alarmas</title>
+    <meta name="description" content="Conocé la historia de JJ Cámaras y Alarmas. Más de 15 años protegiendo hogares y empresas en Zona Oeste.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-900 font-sans selection:bg-red-600 selection:text-white overflow-x-hidden">
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a 
+        href="https://wa.me/5491151016870" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:bg-[#20bd5a] transition-all transform hover:scale-110 flex items-center justify-center"
+        aria-label="Contactar por WhatsApp"
+    >
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8">
+    </a>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-40 bg-black/90 backdrop-blur-md border-b border-gray-800 py-3">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <div class="bg-red-600 p-1.5 rounded-sm shadow-lg shadow-red-600/20">
+                    <i data-lucide="shield" class="w-6 h-6 text-white"></i>
+                </div>
+                <span class="text-xl md:text-2xl font-bold tracking-tighter text-white">JJ SEGURIDAD</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 items-center font-medium text-sm uppercase tracking-widest text-white/80">
+                <a href="index.html" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Inicio</a>
+                <a href="nosotros.html" class="text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500">Nosotros</a>
+                <a href="servicios.html" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Servicios</a>
+                <a href="index.html#galeria" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Proyectos</a>
+                <a href="index.html#locales" class="hover:text-red-500 transition-all duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 hover:after:w-full after:transition-all after:duration-300">Locales</a>
+                <a href="index.html#contacto" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-sm transition-all duration-300 font-bold hover:shadow-[0_0_20px_rgba(220,38,38,0.8)] hover:scale-105">
+                    COTIZAR
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="toggleMenu()">
+                <i data-lucide="menu" id="menuIcon" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenu" class="fixed inset-0 bg-black/95 backdrop-blur-xl border-t border-gray-800 z-50 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col">
+            <div class="flex justify-end p-6">
+                <button class="text-white" onclick="toggleMenu()">
+                    <i data-lucide="x" class="w-7 h-7"></i>
+                </button>
+            </div>
+            <div class="flex flex-col px-8 gap-6 text-center text-white h-full justify-center">
+                <a href="index.html" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Inicio</a>
+                <a href="nosotros.html" class="text-2xl font-bold text-red-500 uppercase py-4 border-b border-gray-800">Nosotros</a>
+                <a href="servicios.html" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Servicios</a>
+                <a href="index.html#galeria" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Galería</a>
+                <a href="index.html#locales" class="text-2xl font-light uppercase py-4 border-b border-gray-800">Ubicación</a>
+                <a href="index.html#contacto" class="text-2xl font-light uppercase py-4 mt-4">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black z-10"></div>
+        
+        <!-- Imagen de Fondo -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069&auto=format&fit=crop" 
+                alt="Equipo de trabajo" 
+                class="w-full h-full object-cover opacity-40"
+            />
+        </div>
+        
+        <div class="relative z-20 container mx-auto px-6 text-center text-white pt-20">
+            <div class="inline-flex items-center gap-2 border border-red-500/50 bg-red-500/10 px-4 py-1 rounded-full mb-6 backdrop-blur-sm animate-fade-in-up">
+                <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                <span class="text-xs md:text-sm font-bold tracking-widest uppercase text-red-400">Desde 2009</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight uppercase animate-fade-in-up" style="animation-delay: 0.1s">
+                Más de 15 Años <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-red-800">Cuidando Tu Tranquilidad</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s">
+                Somos una empresa familiar que creció protegiendo a miles de hogares <br class="hidden md:block"/>
+                y empresas en Zona Oeste y la Costa Atlántica.
+            </p>
+        </div>
+    </section>
+
+    <!-- Historia -->
+    <section class="py-24 bg-black text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="text-red-500 font-bold tracking-widest uppercase text-sm mb-2 block">Nuestra Historia</span>
+                    <h2 class="text-4xl md:text-5xl font-black mb-8 leading-tight uppercase">
+                        Donde Todo Empezó
+                    </h2>
+                    
+                    <div class="space-y-6 text-gray-400 leading-relaxed">
+                        <p>
+                            <strong class="text-white">JJ Cámaras y Alarmas</strong> nació en 2009 en el corazón de Ituzaingó, cuando Juan José decidió convertir su pasión por la tecnología y la seguridad en un emprendimiento familiar. Lo que comenzó como un pequeño taller de instalación de cámaras, hoy es una empresa consolidada con tres locales y un equipo de más de 20 profesionales.
+                        </p>
+                        <p>
+                            Nuestra filosofía siempre fue clara: <strong class="text-white">trabajar con honestidad, usar productos de calidad y brindar un servicio personalizado</strong>. No somos una franquicia ni una multinacional. Somos vecinos que entienden las necesidades reales de seguridad de la zona.
+                        </p>
+                        <p>
+                            En 2015 dimos un salto importante al convertirnos en <strong class="text-red-500">proveedores oficiales del Municipio de Ituzaingó</strong> para el programa de alarmas vecinales. Desde entonces, hemos instalado más de 800 sistemas de seguridad comunitaria, protegiendo a más de 50 cuadras.
+                        </p>
+                        <p>
+                            Hoy, con locales en Ituzaingó, Mar del Tuyú y San Bernardo, seguimos creciendo con el mismo espíritu del primer día: <strong class="text-white">cuidar lo que más importa</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-lg text-center hover:border-red-600 transition-colors">
+                            <div class="text-5xl font-black text-red-500 mb-2">15+</div>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Años de Experiencia</p>
+                        </div>
+                        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-lg text-center hover:border-red-600 transition-colors">
+                            <div class="text-5xl font-black text-red-500 mb-2">800+</div>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Alarmas Vecinales</p>
+                        </div>
+                        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-lg text-center hover:border-red-600 transition-colors">
+                            <div class="text-5xl font-black text-red-500 mb-2">3</div>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Locales a la Calle</p>
+                        </div>
+                        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-lg text-center hover:border-red-600 transition-colors">
+                            <div class="text-5xl font-black text-red-500 mb-2">20+</div>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Profesionales</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-red-900/20 border border-red-600/30 p-6 rounded-lg">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="award" class="text-red-500 mt-1 flex-shrink-0 w-8 h-8"></i>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Proveedor Oficial Municipal</h4>
+                                <p class="text-sm text-gray-300">Reconocidos por el Municipio de Ituzaingó como empresa líder en seguridad comunitaria.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores -->
+    <section class="py-24 bg-neutral-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 uppercase">Nuestros <span class="text-red-500">Valores</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Los principios que guían cada decisión y cada instalación</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6">
+                        <i data-lucide="heart-handshake" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Honestidad</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        No cobramos adelantado. No vendemos lo que no necesitás. Te asesoramos con transparencia para que tomes la mejor decisión según tu presupuesto y necesidades reales.
+                    </p>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Calidad</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Trabajamos exclusivamente con marcas líderes internacionales: Dahua, Hikvision, Imou, DSC. Cada equipo tiene garantía de fábrica y nuestro respaldo técnico.
+                    </p>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6">
+                        <i data-lucide="users-round" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Cercanía</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Somos vecinos. Tenés locales físicos donde venir a consultar, comprar repuestos o pedir soporte. No sos un número de ticket, sos parte de nuestra comunidad.
+                    </p>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Rapidez</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Respondemos consultas al instante. La visita técnica es dentro de las 48hs. Y la instalación en menos de una semana. Entendemos que la seguridad no puede esperar.
+                    </p>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6">
+                        <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Capacitación</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        No solo instalamos, te enseñamos a usar tu sistema. Capacitación presencial incluida en cada venta. Y soporte técnico por WhatsApp cuando lo necesites.
+                    </p>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg reveal">
+                    <div class="bg-red-600 w-16 h-16 rounded-sm flex items-center justify-center mb-6">
+                        <i data-lucide="leaf" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Sostenibilidad</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Reciclamos equipos viejos. Optimizamos cableados para reducir desperdicios. Y promovemos sistemas de bajo consumo energético para cuidar el planeta.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipo -->
+    <section class="py-24 bg-black text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 uppercase">Nuestro <span class="text-red-500">Equipo</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Profesionales certificados y apasionados por la seguridad</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 mb-16">
+                <div class="text-center reveal">
+                    <div class="bg-neutral-800 w-32 h-32 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i data-lucide="user" class="w-16 h-16 text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Técnicos Certificados</h3>
+                    <p class="text-gray-400 text-sm">Capacitación continua con fabricantes</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="bg-neutral-800 w-32 h-32 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i data-lucide="headphones" class="w-16 h-16 text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Soporte 24/7</h3>
+                    <p class="text-gray-400 text-sm">Atención por WhatsApp todo el día</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="bg-neutral-800 w-32 h-32 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i data-lucide="truck" class="w-16 h-16 text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Instaladores</h3>
+                    <p class="text-gray-400 text-sm">Trabajo prolijo y cumplimiento de horarios</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="bg-neutral-800 w-32 h-32 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i data-lucide="store" class="w-16 h-16 text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Asesores</h3>
+                    <p class="text-gray-400 text-sm">Escuchamos y diseñamos soluciones a medida</p>
+                </div>
+            </div>
+
+            <div class="bg-neutral-900 border border-neutral-800 p-10 rounded-lg text-center reveal">
+                <h3 class="text-2xl font-bold mb-4 uppercase">¿Querés formar parte del equipo?</h3>
+                <p class="text-gray-400 mb-6">Estamos en búsqueda permanente de técnicos y vendedores con ganas de crecer.</p>
+                <a href="https://wa.me/5491151016870?text=Hola!%20Quiero%20trabajar%20en%20JJ%20Seguridad" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-3 rounded-sm font-bold hover:bg-red-700 transition-all uppercase tracking-wider">
+                    <i data-lucide="send" class="w-5 h-5"></i> Envianos tu CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificaciones -->
+    <section class="py-24 bg-neutral-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-black mb-4 uppercase">Certificaciones <span class="text-red-500">y Respaldos</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Trabajamos con los mejores proveedores del mundo</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg text-center reveal">
+                    <div class="text-6xl font-black text-white mb-4">HIKVISION</div>
+                    <p class="text-gray-400 text-sm">Partner Oficial Argentina</p>
+                    <div class="mt-4">
+                        <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">N°1 Mundial</span>
+                    </div>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg text-center reveal">
+                    <div class="text-6xl font-black text-white mb-4">DAHUA</div>
+                    <p class="text-gray-400 text-sm">Distribuidor Autorizado</p>
+                    <div class="mt-4">
+                        <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">N°2 Mundial</span>
+                    </div>
+                </div>
+
+                <div class="bg-black border border-neutral-800 p-8 rounded-lg text-center reveal">
+                    <div class="text-6xl font-black text-white mb-4">DSC</div>
+                    <p class="text-gray-400 text-sm">Instalador Certificado</p>
+                    <div class="mt-4">
+                        <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">Alarmas Profesionales</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-red-900/20 border border-red-600/30 p-10 rounded-lg text-center reveal">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <i data-lucide="award" class="text-red-500 w-16 h-16 flex-shrink-0"></i>
+                    <div class="text-left">
+                        <h3 class="text-2xl font-bold mb-2">Proveedor Oficial - Municipio de Ituzaingó</h3>
+                        <p class="text-gray-300">Certificado N° 2845/2015 - Programa de Seguridad Comunitaria</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compromiso -->
+    <section class="py-24 bg-black text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center reveal">
+                <h2 class="text-4xl md:text-6xl font-black mb-8 uppercase">
+                    Nuestro <span class="text-red-500">Compromiso</span> <br/>con vos
+                </h2>
+                
+                <div class="space-y-6 text-lg text-gray-400 leading-relaxed mb-12">
+                    <p>
+                        Cuando elegís <strong class="text-white">JJ Cámaras y Alarmas</strong>, no solo estás comprando un equipo de seguridad. Estás confiando en una empresa familiar que va a estar cuando nos necesites.
+                    </p>
+                    <p>
+                        No somos una empresa más. Somos <strong class="text-white">tus vecinos</strong>, y entendemos perfectamente lo importante que es sentirse seguro en tu hogar, en tu negocio, en tu barrio.
+                    </p>
+                    <p class="text-xl text-white font-bold">
+                        Por eso garantizamos: visita técnica gratuita, sin cobro adelantado, instalación profesional, capacitación incluida y soporte de por vida.
+                    </p>
+                </div>
+
+                <div class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-sm">
+                    <i data-lucide="shield-check" class="w-8 h-8"></i>
+                    <span class="text-xl font-bold uppercase tracking-wider">15 Años Cuidando lo que más importa</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="py-24 bg-gradient-to-b from-neutral-900 to-black text-white">
+        <div class="container mx-auto px-6 text-center reveal">
+            <h2 class="text-4xl md:text-6xl font-black mb-6 uppercase">¿Hablamos de <span class="text-red-500">tu seguridad?</span></h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">Vení a conocer nuestros locales o contactanos por WhatsApp. Te asesoramos sin compromiso.</p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <a href="https://wa.me/5491151016870" target="_blank" class="w-full md:w-auto bg-red-600 text-white px-10 py-5 rounded-sm font-bold text-lg hover:bg-red-700 transition-all hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] uppercase tracking-wider">
+                    <i data-lucide="phone" class="inline-block w-5 h-5 mr-2"></i> Contactar por WhatsApp
+                </a>
+                <a href="index.html#locales" class="w-full md:w-auto flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-10 py-5 rounded-sm font-bold text-lg hover:bg-white hover:text-black transition-all uppercase tracking-wider">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i> Ver Locales
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-neutral-600 py-10 border-t border-neutral-900 text-center text-xs uppercase tracking-widest">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2024 JJ Cámaras y Alarmas.</p>
+            <div class="flex gap-6">
+                <a href="https://www.instagram.com/jjcamarasyalarmas/" target="_blank" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="instagram" class="w-4 h-4"></i> Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=100064225564213" target="_blank" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="facebook" class="w-4 h-4"></i> Facebook</a>
+                <a href="https://www.youtube.com/@JJC%C3%A1marasyAlarmas" target="_blank" class="hover:text-white transition-colors flex items-center gap-1"><i data-lucide="youtube" class="w-4 h-4"></i> Youtube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        function toggleMenu() {
+            const isOpen = !mobileMenu.classList.contains('translate-x-full');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
